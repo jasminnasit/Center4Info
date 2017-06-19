@@ -1,3 +1,30 @@
+<?php
+if(isset($_GET["signupbtn"]))
+{
+$finame=$_GET["fname"];
+$liname=$_GET["lname"];
+$mail=$_GET["emailid"];
+$uid=$_GET["userid"];
+$passwd=$_GET["psswd"];
+
+$db=mysqli_connect("localhost","root","","Center4Info") or die();
+$db=mysqli_query($db,"SELECT `userid` FROM login");
+$db=mysqli_fetch_assoc($db);
+foreach ($db as $id) {
+	if($id==$uid)
+	{
+		$message = "Userid Already Registered";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+	}
+}
+mysqli_query($db,"INSERT INTO login VALUES('$uid','$passwd','$finame','$liname','$mail')");
+setcookie('signup','1',time()+60);
+header("location:login.php");
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

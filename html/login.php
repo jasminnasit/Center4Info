@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,7 @@
 					  		<td colspan="2"><input class="logbtn" type="submit" name="loginbtn" value="Log In"></td>
 					  	</tr>
 					  	<tr><td text-align="right" colspan="2">
-					  	    New User?
+					  	   <a href="signup.php" class="linktosignup">New User?</a>
 					  	</td></tr>
 					  	</table>
 					  </form>
@@ -46,3 +47,10 @@
 
 	</body>
 	</html>
+<?php
+if(isset($_COOKIE['signup']))
+{
+$message = "Successfully Signed up";
+echo "<script type='text/javascript'>alert('$message');</script>";
+}
+?>

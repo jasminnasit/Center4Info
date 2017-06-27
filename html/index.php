@@ -36,8 +36,14 @@ if(isset($_POST['send']))
 if(isset($_POST['postbutton']))
 {
 	$pst=$_POST['postupdate'];
-	$time=date('h:i:s a d/m/y');
-	echo $time;
+	$time=time();
+	$data=mysqli_connect("localhost","root","","Center4Info") or die();
+	$auto=mysqli_query($data,"SELECT max(`pid`) FROM post");
+	$auto=mysqli_fetch_assoc($auto);
+	$auto=$auto['max(`pid`)'];
+	$auto++;
+	mysqli_query($data,"INSERT INTO post VALUES('$auto','$usid','$pst','$time')");
+	echo "<script type='text/javascript'>alert('Successfully Posted');</script>";
 }
 
 ?>
@@ -72,9 +78,54 @@ if(isset($_POST['postbutton']))
 			   
 				<form  class="sharebar" method="post" action="index.php"><textarea name="postupdate" cols="60" rows="5" placeholder="Write Something Here" class="writepost"></textarea> 
 				<input type="submit" name="postbutton" class="postbtn" value="Post"></form>
-				
-			</div>
+				<div class="mainpost">
+            	   <?php
+            	      $id=array();
+            	      $i=0;
+                      $usid=$_COOKIE["user"];
+                      $data=mysqli_connect("localhost","root","","Center4Info") or die();
+                      $db=mysqli_query($data,"SELECT `sender`,`receiver` FROM request WHERE (`sender`='$usid' OR `receiver`='$usid') AND `status`='1'");
+                      foreach ($db as $var) {
+                           if($var['sender']==$usid)
+                           {
+                           	  $id[$i]=$var['receiver'];
+                           }
+                           else
+                           {
+                           	 $id[$i]=$var['sender'];
+                           }
+                        
+                           $i++;
+                      }
 
+                      $id[$i]=$usid;
+                      $m=0;
+                      for($n=0;$n<=$i;$n++)
+                      {
+                      $db=mysqli_query($data,"SELECT `pid` FROM post WHERE `userid`='$id[$n]'");
+                      foreach ($db as $key) {
+                      	$d[$m]=$key['pid'];
+                      	
+                      	$m++;
+                      }
+                      }
+                      sort($d);
+                      for($j=($m-1);$j>=0;$j--)
+                      { 
+                      	$db=mysqli_query($data,"SELECT `userid`,`content`,`time` FROM post WHERE `pid`='$d[$j]'");
+                      	$db=mysqli_fetch_assoc($db);
+                      	$userid=$db['userid'];
+                      	$time=$db['time'];
+                      	$content=$db['content'];
+                        echo "<div class=upost>$userid</div>";
+                        echo "<div class=tpost>$time</div>";
+                        echo "<div class=cpost>$content</div>";
+                      }
+
+            	   ?>
+                </div>
+			</div>
+            
 			</div>
 			<div class="rbar">
 				<div class="searchbar">

@@ -62,10 +62,10 @@ if(isset($_GET["loginbtn"]))
 						<form name="loginform" action="login.php" method="get">
 							<table class="logintab" >
 								<tr>
-									<td>USER ID:</td><td><input type="text" name="userid"></td>
+									<td>USER ID:</td><td><input type="text" name="userid" class="inputs"></td>
 								</tr>
 								<tr>
-									<td>PASSWORD:</td><td><input type="password" name="psswd"></td>
+									<td>PASSWORD:</td><td><input type="password" name="psswd" class="inputs"></td>
 								</tr>
 								<tr>
 									<td colspan="2"><input class="logbtn" type="submit" name="loginbtn" value="Log In"></td>

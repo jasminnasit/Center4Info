@@ -1,17 +1,43 @@
 <?php
 $name="";
 $usid="";
+$usid=$_COOKIE["user"];
 if(!isset($_COOKIE['user'])){
 	header("location:login.php");
 }
 else{
-	$usid=$_COOKIE["user"];
+	
 	$data=mysqli_connect("localhost","root","","Center4Info") or die();
 	$db=mysqli_query($data,"SELECT `fname`,`lname` FROM login WHERE `userid`='$usid'");
 	$db=mysqli_fetch_assoc($db);
 	$fn=$db['fname'];
 	$ln=$db['lname'];
 	$name=$fn." ".$ln;
+}
+
+if(isset($_POST['accept']))
+{
+	$re=$_REQUEST['rec'];
+	$data=mysqli_connect("localhost","root","","Center4Info") or die();
+	mysqli_query($data,"UPDATE request SET `status`='1' WHERE `receiver`='$usid' AND `sender`='$re'");
+	echo "<script type='text/javascript'>alert('Request Accpeted');</script>";
+}
+if(isset($_POST['send']))
+{
+	$re=$_REQUEST['rec'];
+	$data=mysqli_connect("localhost","root","","Center4Info") or die();
+	$auto=mysqli_query($data,"SELECT max(`rid`) FROM request");
+	$auto=mysqli_fetch_assoc($auto);
+	$auto=$auto['max(`rid`)'];
+	$auto++;
+	mysqli_query($data,"INSERT INTO request VALUES('$auto','$usid','$re','0')");
+	echo "<script type='text/javascript'>alert('Request Sent Successfully');</script>";
+}
+if(isset($_POST['postbutton']))
+{
+	$pst=$_POST['postupdate'];
+	$time=date('h:i:s a d/m/y');
+	echo $time;
 }
 
 ?>
@@ -42,6 +68,12 @@ else{
 		</div>
 		<div class="maincontent">
 			<div class="lbar">
+			<div class="pst">
+			   
+				<form  class="sharebar" method="post" action="index.php"><textarea name="postupdate" cols="60" rows="5" placeholder="Write Something Here" class="writepost"></textarea> 
+				<input type="submit" name="postbutton" class="postbtn" value="Post"></form>
+				
+			</div>
 
 			</div>
 			<div class="rbar">
@@ -52,6 +84,7 @@ else{
 						
 					</div>
 				</div>
+
 			</div>
 
 		</div>

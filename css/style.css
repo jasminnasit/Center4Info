@@ -106,7 +106,7 @@ width: 100%;
 td{
 	padding:20px;
 }
-input[type=text],input[type=password]{
+.inputs{
     background: transparent;
     border:none;
     border-bottom:2px solid white;
@@ -289,7 +289,67 @@ ul#menu li a:hover
 .searchbar{
 	
 	padding-top: 6%;
-	width: 72%;
+	width: 86%;
 	margin:0 auto;
 }
+.searchtbl{
+	background-color: #222;
+	color: white;
+	width: 100%;
+	border: 2px solid white;
+	border-radius: 8px;
+	
 
+}
+.row{
+	padding: 8px;
+}
+
+#abtn{
+	width:100%;
+	background-color: #cae0c3;
+	border:1px solid #cae0c3;
+	border-radius: 5px;
+
+}
+#dropdown{
+	position: absolute;
+	z-index: 2;
+}
+
+#head{
+	position: relative;
+	z-index: 1;
+}
+
+.pst{
+	width: 90%;
+	height: 110vh;
+    margin: 0 auto;
+
+}
+.writepost{
+	border:2px solid #757774;
+	border-radius: 3px;
+	height: 10vh;
+	width:90%;
+	
+
+}
+.postbtn{
+	height: 5vh;
+	background-color: #757774;
+	border:1px solid #757774;
+	border-radius: 3px;
+	margin-top: 3vh;
+	margin-left: 1%;
+	width:9%;
+
+
+}
+.sharebar{
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 3vh;
+	display: flex;
+}

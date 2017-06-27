@@ -62,19 +62,19 @@ if(isset($_GET["signupbtn"]))
 							<table class="logintab" >
 
 								<tr>
-									<td>FIRST NAME:</td><td><input type="text" name="fname"></td>
+									<td>FIRST NAME:</td><td><input type="text" name="fname" class="inputs"></td>
 								</tr>
 								<tr>
-									<td>LAST NAME:</td><td><input type="text" name="lname"></td>
+									<td>LAST NAME:</td><td><input type="text" name="lname" class="inputs"></td>
 								</tr>
 								<tr>
-									<td>EMAIL ID:</td><td><input type="text" name="emailid"></td>
+									<td>EMAIL ID:</td><td><input type="text" name="emailid" class="inputs"></td>
 								</tr>
 								<tr>
-									<td>USER ID:</td><td><input type="text" name="userid"></td>
+									<td>USER ID:</td><td><input type="text" name="userid" class="inputs"></td>
 								</tr>
 								<tr>
-									<td>PASSWORD:</td><td><input type="password" name="psswd"></td>
+									<td>PASSWORD:</td><td><input type="password" name="psswd" class="inputs"></td>
 								</tr>
 								<tr>
 									<td colspan="2"><input class="logbtn" type="submit" name="signupbtn" value="Sign Up"></td>

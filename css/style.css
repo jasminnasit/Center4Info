@@ -365,16 +365,16 @@ ul#menu li a:hover
 	height: auto;
 	width: 100%;
 	font-size: 22px;
-	padding: 2px;
+	padding-left: 5px;
 
 }
 .tpost{
   width: 100%;
   font-size: 11px;
-  padding: 2px;
+  padding-left: 5px;
 }
 .cpost{
   width:100%;
   font-size: 16px;
-  padding: 2px;
+  padding-left: 5px;
 }

@@ -44,7 +44,7 @@ if(stristr($data,substr($fn, 0,$length))){
     }
     else if($flag==1){
      $found=1;
-     $tdata=$tdata."<tr><td class=row>$fn $ln</td><td class=row>$id</td><td class=row><form method=post action=index.php?rec=$id><input type=submit name=accept value=accept id=abtn></form></td></tr>";
+     $tdata=$tdata."<tr><td class=row>$fn $ln</td><td class=row>$id</td><td class=row><form method=post action=index.php?rec=$id><input type=submit name=accept value=Accept id=abtn></form></td></tr>";
     }
     else if($flag==2){
      $found=1;

@@ -13,6 +13,7 @@ else{
 	$fn=$db['fname'];
 	$ln=$db['lname'];
 	$name=$fn." ".$ln;
+
 }
 
 if(isset($_POST['accept']))
@@ -38,7 +39,7 @@ if(isset($_POST['postbutton']))
 	$pst=$_POST['postupdate'];	
 	
 	$time=time();
-	echo $time;
+	
 	$data=mysqli_connect("localhost","root","","Center4Info") or die();
 	$auto=mysqli_query($data,"SELECT max(`pid`) FROM post");
 	$auto=mysqli_fetch_assoc($auto);
@@ -50,7 +51,7 @@ if(isset($_POST['postbutton']))
 ?>
 
 <!DOCTYPE HTML>
-<html><head><title>black &amp; white</title><meta name="description" content="website description"><meta name="keywords" content="website keywords, website keywords"><meta http-equiv="content-type" content="text/html; charset=windows-1252"><link rel="stylesheet" type="text/css" href="../css/style.css?version=1" title="style"></head><body>
+<html><head><title>black &amp; white</title><meta name="description" content="website description"><meta name="keywords" content="website keywords, website keywords"><meta http-equiv="content-type" content="text/html; charset=windows-1252"><link rel="stylesheet" type="text/css" href="../css/style.css?version=51" title="style"></head><body>
 <div id="main">
 	<div id="header">
 		<div id="logo">
@@ -120,6 +121,7 @@ if(isset($_POST['postbutton']))
 						//echo $time2;
 								$diff=$time2-$time;
 								$df=(int)$diff/3600;
+								$r=(int)$diff/3600;
 								if($df<1)
 								{
 									if((int)($diff/60)<2)
@@ -137,10 +139,23 @@ if(isset($_POST['postbutton']))
 										$df=((int)($diff/60))." Minutes";
 									}
 								}
+								else{
+									$df=$df." Hours";
+								}
+
+								
 								$content=$db['content'];
+								if($r<24){
+								echo "<div class=whole>";
 								echo "<div class=upost>$userid</div>";
 								echo "<div class=tpost>$df</div>";
 								echo "<pre><div class=cpost>$content</div></pre>";
+								echo "</div>";
+							   }
+							   else{
+							   	$data=mysqli_connect("localhost","root","","Center4Info") or die();
+							   	mysqli_query($data,"DELETE FROM post WHERE `pid`='$d[$j]'");
+							   }
 							}
 
 							?>
@@ -155,6 +170,28 @@ if(isset($_POST['postbutton']))
 						<div id="dropdown">
 
 						</div>
+
+					</div>
+					<div class="reqaccept">
+					<?php
+					    $tdat="";
+					    $receiv=$_COOKIE['user'];
+						$dt=mysqli_connect("localhost","root","","Center4Info") or die();	
+						$req=mysqli_query($dt,"SELECT `sender` FROM request WHERE `receiver`='$receiv' AND `status`='0'");
+						
+						foreach ($req as $val) {
+							$id=$val['sender'];
+							$name=mysqli_query($dt,"SELECT `fname`,`lname`,`userid` FROM login WHERE `userid`='$id'");
+							$name=mysqli_fetch_assoc($name);
+							$fn=$name['fname'];
+							$ln=$name['lname'];
+							$userid=$name['userid'];
+                        $tdat=$tdat."<tr><td class=row>$fn $ln</td><td class=row>$userid</td><td class=row><form method=post action=index.php?rec=$id><input type=submit name=accept value=Accept id=abtn></form></td></tr>";
+
+						}
+						echo "<table class=searchtbl>$tdat</table>";
+
+					?>
 					</div>
 
 				</div>

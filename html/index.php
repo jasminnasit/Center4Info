@@ -51,7 +51,7 @@ if(isset($_POST['postbutton']))
 ?>
 
 <!DOCTYPE HTML>
-<html><head><title>black &amp; white</title><meta name="description" content="website description"><meta name="keywords" content="website keywords, website keywords"><meta http-equiv="content-type" content="text/html; charset=windows-1252"><link rel="stylesheet" type="text/css" href="../css/style.css?version=51" title="style"></head><body>
+<html><head><title>black &amp; white</title><meta name="description" content="website description"><meta name="keywords" content="website keywords, website keywords"><meta http-equiv="content-type" content="text/html; charset=windows-1252"><link rel="stylesheet" type="text/css" href="../css/style.css?version=999" title="style"></head><body>
 <div id="main">
 	<div id="header">
 		<div id="logo">
@@ -77,7 +77,7 @@ if(isset($_POST['postbutton']))
 
 					<form  class="sharebar" method="post" action="index.php"><textarea name="postupdate" cols="60" rows="5" placeholder="Write Something Here" class="writepost"></textarea> 
 						<input type="submit" name="postbutton" class="postbtn" value="Post"></form>
-						<div class="mainpost">
+						<div class="mainpost" id="style-13">
 							<?php
 							$id=array();
 							$i=0;
@@ -114,7 +114,14 @@ if(isset($_POST['postbutton']))
 								$db=mysqli_query($data,"SELECT `userid`,`content`,`time` FROM post WHERE `pid`='$d[$j]'");
 								$db=mysqli_fetch_assoc($db);
 								$userid=$db['userid'];
+								$nm=mysqli_query($data,"SELECT `fname`,`lname` FROM login WHERE `userid`='$userid'");
+								$nm=mysqli_fetch_assoc($nm);
+								$fn=$nm['fname'];
+							    $fn=ucfirst($fn);
+								$ln=$nm['lname'];
+								$ln=ucfirst($ln);
 								$time=$db['time'];
+								$userid=strtoupper($userid);
 								date_default_timezone_set("Asia/Kolkata");
 								$time2=time();
 						//echo $time;
@@ -140,14 +147,14 @@ if(isset($_POST['postbutton']))
 									}
 								}
 								else{
-									$df=$df." Hours";
+									$df=(int)$df." Hours";
 								}
 
 								
 								$content=$db['content'];
 								if($r<24){
 								echo "<div class=whole>";
-								echo "<div class=upost>$userid</div>";
+								echo "<div class=upost>$fn $ln <div id=headuid> &nbsp;&nbsp;($userid)</div></div>";
 								echo "<div class=tpost>$df</div>";
 								echo "<pre><div class=cpost>$content</div></pre>";
 								echo "</div>";
@@ -189,7 +196,7 @@ if(isset($_POST['postbutton']))
                         $tdat=$tdat."<tr><td class=row>$fn $ln</td><td class=row>$userid</td><td class=row><form method=post action=index.php?rec=$id><input type=submit name=accept value=Accept id=abtn></form></td></tr>";
 
 						}
-						echo "<table class=searchtbl>$tdat</table>";
+						echo "<table class=searchtabl>$tdat</table>";
 
 					?>
 					</div>

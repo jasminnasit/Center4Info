@@ -1,3 +1,22 @@
+<?php
+$name="";
+$usid="";
+$usid=$_COOKIE["user"];
+if(!isset($_COOKIE['user'])){
+	header("location:login.php");
+}
+else{
+	
+	$data=mysqli_connect("localhost","root","","Center4Info") or die();
+	$db=mysqli_query($data,"SELECT `fname`,`lname` FROM login WHERE `userid`='$usid'");
+	$db=mysqli_fetch_assoc($db);
+	$fn=$db['fname'];
+	$ln=$db['lname'];
+	$name=$fn." ".$ln;
+
+}
+?>
+
 <!DOCTYPE HTML>
 <html><head><title>black &amp; white</title><meta name="description" content="website description"><meta name="keywords" content="website keywords, website keywords"><meta http-equiv="content-type" content="text/html; charset=windows-1252"><link rel="stylesheet" type="text/css" href="../css/style.css" title="style"></head><body>
   <div id="main">
@@ -5,6 +24,10 @@
       <div id="logo">
       <div class="black">
         <img class="clogo" src="../images/logo.png">
+        <div class="loginname">
+					<?php echo $name; ?><br>
+					<?php echo $usid; ?>
+		</div>
       </div>
       </div>
       <div id="menubar">
@@ -18,7 +41,7 @@
   
     <div id="content_footer"></div>
     <div id="footer">
-      Copyright © black &amp; white | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a>
+     
 </div>
   </div>
 </body></html>
